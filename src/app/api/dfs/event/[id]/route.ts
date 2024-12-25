@@ -1,9 +1,8 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import axios, { AxiosError } from "axios";
 
-export async function GET(request: Request, { params }: { params: { id: string } }) {
-  // Await the params (this part may depend on your Next.js version)
-  const eventId = params?.id;
+export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
+  const eventId = params.id;
 
   if (!eventId) {
     return NextResponse.json({ error: "Event ID is required" }, { status: 400 });
@@ -24,9 +23,7 @@ export async function GET(request: Request, { params }: { params: { id: string }
   } catch (error: unknown) {
     console.error("Error fetching event details:", error);
 
-    // Type assertion: asserting 'error' as AxiosError to access .response
     if (error instanceof AxiosError) {
-      // Handle the 429 rate limit error
       if (error.response?.status === 429) {
         return NextResponse.json({ error: "Rate limit exceeded. Please try again later." }, { status: 429 });
       }
