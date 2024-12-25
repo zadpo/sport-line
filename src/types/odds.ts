@@ -25,3 +25,18 @@ export interface Outcome {
   name: string;
   price: number;
 }
+
+export interface FuturesPlayer {
+  id: string;
+  name: string;
+  imageUrl: string;
+  odds: {
+    [bookmaker: string]: string;
+  };
+}
+
+export interface FuturesData {
+  category: string;
+  title: string;
+  players: FuturesPlayer[];
+}

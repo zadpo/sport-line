@@ -1,6 +1,6 @@
 "use client";
 
-import SportsBetting from "./odds/page";
+import SportsBetting from "@/components/sports-betting";
 
 export default function Home() {
   return <SportsBetting />;
